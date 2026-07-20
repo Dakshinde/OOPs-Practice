@@ -1,0 +1,17 @@
+name : Learning Path Setup
+
+on:
+  push:
+    branches: [main]
+
+
+jobs:
+  smoke_test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Print Hello DevOps World
+        run: echo "Starting the deployment pipeline engine"
+
+      - name: Verify Python Environment Installation
+        run: python3 --version  
