@@ -1,3 +1,20 @@
+# ==============================================================================
+# DEVOPS GATEKEEPER: CI/CD QUALITY ASSURANCE PIPELINE
+# ==============================================================================
+# WHAT IT DOES:
+# 1. Triggers on pushes/PRs to 'main' -> Runs on isolated cloud Ubuntu VMs.
+# 2. Clones code, sets up Python 3.11, and installs requirements from ledger.
+# 3. Runs Flake8: Catches syntax errors (Fails if Exit Code > 0).
+# 4. Runs Mypy: Enforces strict type checking for OOP architecture safety[cite: 1].
+# 5. Connects to Repository Rulesets to block broken code from entering production.
+#
+# TERMINAL COMMAND CHEATSHEET FOR DAILY DEVELOPMENT REVISION:
+#   Step A (Create Branch): git checkout -b feature/your-feature-name
+#   Step B (Stage Changes): git add .
+#   Step C (Commit Changes): git commit -m "feat: short description of work"
+#   Step D (Push Sandbox):  git push origin feature/your-feature-name
+# ==============================================================================
+
 name: Code Quality Assurance
 
 on:
