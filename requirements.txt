@@ -1,0 +1,6 @@
+# Development & Quality Assurance Utilities
+flake8==7.1.0
+mypy==1.10.0
+black==24.4.2
+
+# Production Dependencies (Add FastAPI/Uvicorn here in Phase 2)
