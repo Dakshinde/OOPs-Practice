@@ -1,17 +1,41 @@
-name : Learning Path Setup
+name: Code Quality Assurance
 
 on:
   push:
-    branches: [main]
-
+    branches: [ main ]
+  pull_request:
+    branches: [ main ] # Triggers whenever someone targets a PR towards main
 
 jobs:
-  smoke_test:
+  static-analysis:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Print Hello DevOps World
-        run: echo "Starting the deployment pipeline engine"
+      # 1. Pull down your repository files onto the runner
+      - name: Check out repository code
+        uses: actions/checkout@v4
 
-      - name: Verify Python Environment Installation
-        run: python3 --version  
+      # 2. Spin up a dedicated Python environment
+      - name: Set up Python runtime
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      # 3. Install the tools from your requirements.txt
+      - name: Install Linting and Type Checking Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      # 4. Enforce strict linting rules
+      - name: Run Flake8 Code Linter
+        run: |
+          # Crucial syntax check: fails the build on critical errors
+          flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+          # Stylistic check: alerts us to style issues without stopping the run
+          flake8 . --count --exit-zero --max-complexity=10 --max-line-length=88 --statistics
+
+      # 5. Enforce strict type checking on your architecture
+      - name: Run Mypy Static Type Verification
+        run: mypy .
