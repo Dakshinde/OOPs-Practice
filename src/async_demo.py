@@ -43,3 +43,10 @@ async def main():
     print(f"Thought for the day: {proverb_text}")
 
 asyncio.run(main())
+
+""" what we learned is that 
+keyword for asynchronized function is - async 
+its good for I/O Bound work that is the work that depends upon network and input output through the network 
+not good for cpu bound which is the heavy lifting math generating etc we use multithreading for that
+asyncio.sleep(2) means sleep for 2 but other system will ofcourse work its opposite of time.sleep(2)
+"""
