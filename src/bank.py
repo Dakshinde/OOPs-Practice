@@ -6,6 +6,7 @@ if withdrawing money and inputing pin and more than 2 wrong pin or password in o
 from decimal import Decimal
 import hashlib
 from datetime import datetime
+from typing import Any
 
 class InsufficientFundsError(Exception):
     def __init__(self, balance: Decimal, requested_amount: Decimal):
@@ -51,7 +52,7 @@ class BankAccount:
         # System state tracking attributes
         self.failed_attempt = 0
         self.is_blocked = False
-        self.transaction_history = []
+        self.transaction_history: list[dict[str, Any]] = []
 
     def verify_pin(self, input_pin:str) -> bool:
         hashed_input_pin = hashlib.sha256(
